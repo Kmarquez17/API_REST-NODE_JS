@@ -1,6 +1,6 @@
 'use strict'
 
-//Cuando se manda a requerir un archivo de una carpeta si no es index 
+//Cuando se manda a requerir un archivo de una carpeta si no es index
 //se tiene que poner el nombre del archivo a ocupar
 const User = require('../models/user')
 const service = require('../services')
@@ -21,19 +21,18 @@ function signUp(req, res){
 }
 
 function signIn(req, res){
-		User.find({email: req.body.email},(err,res) => {
-		if(err) return res.status(500).send({message: err})
+	User.find({ email: req.body.email }, (err, user) => {
+	if (err) return res.status(500).send({ message: err })
+	if (!user) return res.status(404).send({ message: 'No existe el usuario' })
 
-		if(!user) return res.status(404).sen({message: `No existe el Usuario`})
-
-		req.user = user
-		res.status(200).send({
-			message:`Te has Logiado correctamente`,
-			token: service.createToken(user)
-		})
+	req.user = user
+	res.status(200).send({
+		message: 'Te has logueado correctamente',
+		token: service.createToken(user)
 	})
+})
 }
-	
+
 module.exports = {
 	signUp,
 	signIn

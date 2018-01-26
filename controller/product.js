@@ -6,7 +6,7 @@ const Product = require('../models/product')
 function getproducts(req, res){
 	Product.find({},(err,product) => {
 		if(err) return res.status(500).send({message: `Error al realizar la petición:${err}`})
-		if(!product) return res.status(404).send({message: `El producto no existe`})	
+		if(!product) return res.status(404).send({message: `El producto no existe`})
 		res.status(200).send({product: product})
 	})
 }
@@ -15,8 +15,8 @@ function getproduct(req,res){
 	let id = req.params.id
 	Product.findById(id,(err,product) => {
 		if(err) return res.status(500).send({message: `Error al realizar la petición:${err}`})
-		if(!product) return res.status(404).send({message: `El producto no existe`})	
-		res.status(200).send({product: product})	
+		if(!product) return res.status(404).send({message: `El producto no existe`})
+		res.status(200).send({product: product})
 	})
 }
 
@@ -44,7 +44,7 @@ function updateproduct(res,req){
 	let id = req.params.id
 	let update = req.body
 	Product.findByIdAndUpdate(id,update, (err, productUpdate) => {
-		if(err) res.status(500).send({message: `Error a la hora de eliminar el producto : ${err}`})		
+		if(err) res.status(500).send({message: `Error a la hora de eliminar el producto : ${err}`})
 		res.status(200).send({product: productUpdate})
 	})
 }
@@ -59,7 +59,7 @@ function deleteproduct(res,req){
 		product.remove(err =>{
 			if(err) res.status(500).send({message: `Error a la hora de borrar el producto : ${err}`})
 				res.status(200).send({message: `El producto ha sido elimimado`})
-		})	
+		})
 	})
 }
 
@@ -70,4 +70,3 @@ module.exports  = {
 	updateproduct,
 	deleteproduct
 }
-

@@ -2,8 +2,8 @@
 
 const service = require('../services')
 
-function isAuth(req, res, next) 
-{ 
+function isAuth(req, res, next)
+{
 	if(!req.headers.authorization){
 		return res.status(403).send({message:`No tienes autorizacion`})
 	}
@@ -19,7 +19,4 @@ function isAuth(req, res, next)
 		res.status(response.status)
 	})
 }
-	
-
-
 module.exports = isAuth
